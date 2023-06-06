@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hoa.clean_architecture.ui.screen.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hoa.clean_architecture.ui.screen.header.HeaderView
+            android:id="@+id/item_detail_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_50"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setViewHandler="@{viewModel}" />
+
+        <com.hoa.clean_architecture.ui.screen.body.BodyView
+            android:id="@+id/item_detail_body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_header"
+            app:setViewHandler="@{viewModel}" />
+
+        <com.hoa.clean_architecture.ui.view.loading.LoadingView
+            android:id="@+id/item_detail_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:setViewHandler="@{viewModel}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

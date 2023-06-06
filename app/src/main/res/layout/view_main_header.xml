@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/grid_50"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/header_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bluish"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/placeholder_image" />
+
+    <com.hoa.clean_architecture.ui.view.closeicon.CloseIconView
+        android:id="@+id/header_close_button"
+        android:layout_width="@dimen/grid_15"
+        android:layout_height="@dimen/grid_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.hoa.clean_architecture.ui.view.favorite.FavoriteIconView
+        android:id="@+id/header_favorite_button"
+        android:layout_width="@dimen/grid_15"
+        android:layout_height="@dimen/grid_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</merge>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_height="match_parent"
+    tools:layout_width="match_parent"
+    tools:parentTag="FrameLayout">
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        android:layout_width="@dimen/grid_15"
+        android:layout_height="@dimen/grid_15"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        app:tint="@color/bluish" />
+</merge>

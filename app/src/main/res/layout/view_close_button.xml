@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/grid_16"
+    android:layout_height="@dimen/grid_16"
+    tools:parentTag="FrameLayout">
+
+    <ImageView
+        android:id="@+id/view_close_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:padding="@dimen/grid_3"
+        tools:src="@drawable/ic_close_circle_white" />
+</merge>

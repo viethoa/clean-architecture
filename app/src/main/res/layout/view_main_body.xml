@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/body_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/grid_4"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_header"
+        tools:text="Item Name" />
+
+    <TextView
+        android:id="@+id/body_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_4"
+        android:paddingEnd="@dimen/grid_4"
+        android:paddingBottom="@dimen/grid_4"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintTop_toBottomOf="@id/body_title"
+        tools:text="Item description" />
+</merge>
