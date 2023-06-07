@@ -10,7 +10,7 @@ class LoadingViewModel constructor(
     private val lifecycleOwner: LifecycleOwner
 ) {
 
-    private val loading: View by lazy { rootView.findViewById(R.id.loading_progress_bar) }
+    private val loading by lazy { rootView.findViewById<View>(R.id.loading_progress_bar) }
 
     fun initializeUI(handler: ILoadingView) {
         handler.loadingVisibility.observe(lifecycleOwner) { visibility ->

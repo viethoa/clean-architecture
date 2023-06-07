@@ -12,9 +12,9 @@ class CloseIconViewModel constructor(
     private val navigator: Navigator,
     private val lifecycleOwner: LifecycleOwner,
     private val resourcesProvider: ResourcesProvider
-) {
+) : View.OnClickListener {
 
-    private val closeButton: ImageView by lazy { rootView.findViewById(R.id.view_close_button) }
+    private val closeButton by lazy { rootView.findViewById<ImageView>(R.id.view_close_button) }
 
     fun initializeUI(handler: ICloseIcon) {
         with(handler) {
@@ -31,9 +31,11 @@ class CloseIconViewModel constructor(
                     resourcesProvider.getColor(data.tintColor)
                 )
             }
-            closeButton.setOnClickListener {
-                navigator.exitScreen()
-            }
+            closeButton.setOnClickListener(this@CloseIconViewModel)
         }
+    }
+
+    override fun onClick(v: View?) {
+        navigator.exitScreen()
     }
 }

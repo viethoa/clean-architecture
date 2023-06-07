@@ -10,7 +10,7 @@ import com.hoa.clean_architecture.ui.base.DIParent
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-class MainActivity : BaseActivity(), DIParent {
+class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -23,14 +23,7 @@ class MainActivity : BaseActivity(), DIParent {
             .build()
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getDependency(cls: KClass<T>): T {
-        if (cls.isInstance(component)) {
-            return component as T
-        } else {
-            throw Exception("Update MainComponent to extend from your ${cls.simpleName}")
-        }
-    }
+    override fun getActivityComponent(): Any = component
 
     override fun setupDependencyInjection() {
         component.inject(this)
