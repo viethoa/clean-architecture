@@ -59,7 +59,7 @@ class MainViewModel constructor(
     override fun onFavoriteClicked(item: MenuItem) {
         _loading.value = true
         // Switch item favorite
-        _menuItem.value = _menuItem.value?.switchFavoriteState()
+        _menuItem.value = item.switchFavoriteState()
         // Call Api to update
         viewModelScope.launch {
             when (favoriteUseCase.switchFavorite(item)) {
