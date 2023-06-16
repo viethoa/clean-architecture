@@ -1,9 +1,9 @@
-package com.hoa.clean_architecture.ui.view.fake
+package com.hoa.clean_architecture.ui.fake
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.data.entity.MenuItem
+import com.hoa.clean_architecture.data.model.MenuItem
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIcon
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIconType
 import com.hoa.clean_architecture.ui.view.closeicon.ICloseIcon

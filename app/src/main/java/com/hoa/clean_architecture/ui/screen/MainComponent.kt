@@ -1,11 +1,12 @@
 package com.hoa.clean_architecture.ui.screen
 
+import android.content.Context
 import com.hoa.clean_architecture.component.Navigator
 import com.hoa.clean_architecture.component.NavigatorImpl
 import com.hoa.clean_architecture.data.DataModule
-import com.hoa.clean_architecture.data.MenuRepository
+import com.hoa.clean_architecture.data.repository.MenuItemRepository
 import com.hoa.clean_architecture.domain.DomainModule
-import com.hoa.clean_architecture.domain.MenuItemFavoriteUseCase
+import com.hoa.clean_architecture.domain.usecase.MenuItemFavoriteUseCase
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIconDependency
 import dagger.Component
 import dagger.Module
@@ -26,13 +27,16 @@ interface MainComponent : CloseIconDependency {
 class MainModule(private val screen: MainActivity) {
 
     @Provides
+    fun provideContext(): Context = screen.applicationContext
+
+    @Provides
     fun provideNavigator(): Navigator {
         return NavigatorImpl(screen)
     }
 
     @Provides
     fun provideMainViewModel(
-        repository: MenuRepository,
+        repository: MenuItemRepository,
         useCase: MenuItemFavoriteUseCase
     ): MainViewModel {
         return MainViewModel(repository, useCase)

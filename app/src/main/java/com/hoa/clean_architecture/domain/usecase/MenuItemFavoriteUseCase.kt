@@ -1,7 +1,7 @@
-package com.hoa.clean_architecture.domain
+package com.hoa.clean_architecture.domain.usecase
 
 import com.hoa.clean_architecture.data.ApiResponse
-import com.hoa.clean_architecture.data.entity.MenuItem
+import com.hoa.clean_architecture.data.model.MenuItem
 
 interface MenuItemFavoriteUseCase {
     /**

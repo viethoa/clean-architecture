@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.data.ApiResponse
-import com.hoa.clean_architecture.data.MenuRepository
-import com.hoa.clean_architecture.data.entity.MenuItem
-import com.hoa.clean_architecture.domain.MenuItemFavoriteUseCase
+import com.hoa.clean_architecture.data.isRemote
+import com.hoa.clean_architecture.data.repository.MenuItemRepository
+import com.hoa.clean_architecture.data.model.MenuItem
+import com.hoa.clean_architecture.domain.usecase.MenuItemFavoriteUseCase
+import com.hoa.clean_architecture.domain.mapper.getFavoriteException
 import com.hoa.clean_architecture.ui.screen.body.IBodyView
 import com.hoa.clean_architecture.ui.view.loading.ILoadingView
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIcon
@@ -17,7 +19,7 @@ import com.hoa.clean_architecture.ui.screen.header.IHeaderView
 import kotlinx.coroutines.launch
 
 class MainViewModel constructor(
-    private val repository: MenuRepository,
+    private val repository: MenuItemRepository,
     private val favoriteUseCase: MenuItemFavoriteUseCase
 ) : ViewModel(),
     IHeaderView,
@@ -43,16 +45,20 @@ class MainViewModel constructor(
     fun getMenuItem() {
         _loading.value = true
         viewModelScope.launch {
-            when (val result = repository.getMenuItem()) {
-                is ApiResponse.Success -> {
-                    _loading.value = false
-                    _menuItem.value = result.data
+            repository
+                .getMenuItem(1)
+                .collect { response ->
+                    when (response) {
+                        is ApiResponse.Success -> {
+                            _menuItem.value = response.data
+                            _loading.value = !response.sourceType.isRemote()
+                        }
+                        is ApiResponse.Error -> {
+                            _loading.value = false
+                            uiState.value = MainUiState.GetMenuItemError
+                        }
+                    }
                 }
-                is ApiResponse.Error -> {
-                    _loading.value = false
-                    uiState.value = MainUiState.GetMenuItemException
-                }
-            }
         }
     }
 
@@ -62,11 +68,11 @@ class MainViewModel constructor(
         _menuItem.value = item.switchFavoriteState()
         // Call Api to update
         viewModelScope.launch {
-            when (favoriteUseCase.switchFavorite(item)) {
+            when (val response = favoriteUseCase.switchFavorite(item)) {
                 is ApiResponse.Error -> {
                     _loading.value = false
                     _menuItem.value = _menuItem.value?.switchFavoriteState()
-                    uiState.value = MainUiState.FavoriteException
+                    uiState.value = MainUiState.FavoriteError(response.getFavoriteException())
                 }
                 is ApiResponse.Success -> {
                     _loading.value = false

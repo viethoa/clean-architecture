@@ -1,12 +1,14 @@
-package com.hoa.clean_architecture.data
+package com.hoa.clean_architecture.data.repository
 
-import com.hoa.clean_architecture.data.entity.MenuItem
+import com.hoa.clean_architecture.data.ApiResponse
+import com.hoa.clean_architecture.data.model.MenuItem
+import kotlinx.coroutines.flow.Flow
 
-interface MenuRepository {
+interface MenuItemRepository {
     /**
      * Get [MenuItem] data
      */
-    suspend fun getMenuItem(): ApiResponse<MenuItem>
+    suspend fun getMenuItem(itemId: Int): Flow<ApiResponse<MenuItem>>
 
     /**
      * Add a [MenuItem] into user favorite list

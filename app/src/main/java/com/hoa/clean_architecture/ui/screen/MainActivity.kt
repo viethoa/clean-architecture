@@ -6,9 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.hoa.clean_architecture.ui.base.BaseActivity
 import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.databinding.ActivityMainBinding
-import com.hoa.clean_architecture.ui.base.DIParent
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class MainActivity : BaseActivity() {
 
@@ -36,11 +34,11 @@ class MainActivity : BaseActivity() {
 
         viewModel.uiState.observe(this) { state ->
             when (state) {
-                MainUiState.GetMenuItemException -> {
+                is MainUiState.GetMenuItemError -> {
                     Toast.makeText(this, "Get Item Detail Exceptions", Toast.LENGTH_SHORT).show()
                 }
-                MainUiState.FavoriteException -> {
-                    Toast.makeText(this, "Favorite Exception", Toast.LENGTH_SHORT).show()
+                is MainUiState.FavoriteError -> {
+                    Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
                 }
             }
         }

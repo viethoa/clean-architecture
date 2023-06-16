@@ -20,7 +20,7 @@ class HeaderViewModel constructor(
         closeButton.setHandler(handler)
         favoriteButton.setHandler(handler)
         handler.menuItem.observe(lifecycleOwner) { item ->
-            item.image?.let { image.setImageResource(it) }
+            item.getItemImage()?.let { image.setImageResource(it) }
         }
     }
 }

@@ -3,7 +3,6 @@ package com.hoa.clean_architecture.component
 import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
-import javax.inject.Inject
 
 interface ResourcesProvider {
     /**
@@ -12,14 +11,6 @@ interface ResourcesProvider {
      * @return String
      */
     fun getString(@StringRes resId: Int): String
-
-    /**
-     * Get String
-     * @param formatId resource id of string
-     * @param formatArgs format of string
-     * @return String
-     */
-    fun getString(@StringRes formatId: Int, vararg formatArgs: Any): String
 
     /**
      * Get Color Res ID
@@ -33,10 +24,6 @@ class ResourcesProviderImpl constructor(private val context: Context) : Resource
 
     override fun getString(resId: Int): String {
         return context.getString(resId)
-    }
-
-    override fun getString(formatId: Int, vararg formatArgs: Any): String {
-        return context.getString(formatId, *formatArgs)
     }
 
     override fun getColor(colorId: Int): Int {

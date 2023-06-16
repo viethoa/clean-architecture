@@ -5,7 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.testing.TestLifecycleOwner
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.ui.view.fake.FakeHandler
+import com.hoa.clean_architecture.ui.fake.FakeHandler
 import com.hoa.clean_architecture.ui.view.loading.LoadingViewModel
 import io.mockk.clearAllMocks
 import io.mockk.confirmVerified

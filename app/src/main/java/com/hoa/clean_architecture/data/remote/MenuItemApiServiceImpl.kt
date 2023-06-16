@@ -1,12 +1,14 @@
-package com.hoa.clean_architecture.data
+package com.hoa.clean_architecture.data.remote
 
-import com.hoa.clean_architecture.data.entity.MenuItem
-import java.lang.Exception
+import com.hoa.clean_architecture.data.ApiException
+import com.hoa.clean_architecture.data.ApiResponse
+import com.hoa.clean_architecture.data.SourceType
+import com.hoa.clean_architecture.data.model.MenuItem
 import kotlin.random.Random
 
-class MenuRepositoryImpl : MenuRepository {
+class MenuItemApiServiceImpl : MenuItemApiService {
 
-    override suspend fun getMenuItem(): ApiResponse<MenuItem> {
+    override suspend fun getMenuItem(itemId: Int): ApiResponse<MenuItem> {
         return ApiResponse.Success(
             MenuItem(
                 id = 1,
@@ -18,21 +20,22 @@ class MenuRepositoryImpl : MenuRepository {
                     "- Vị chuẩn : vị thanh, hậu ngọt, không bị chát, hậu ko bị đắng như matcha kém.\n" +
                     "- Cảm thấy tăng lực, tỉnh táo, hồi phục sức khỏe sau khi uống.",
                 isFavorite = false
-            )
+            ),
+            SourceType.REMOTE
         )
     }
 
     override suspend fun addItemToFavorite(item: MenuItem): ApiResponse<Any> {
         return when (Random.nextInt() % 2) {
             0 -> ApiResponse.Success(Any())
-            else -> ApiResponse.Error(Exception("Something went wrong!!"))
+            else -> ApiResponse.Error(ApiException("Something went wrong!!"))
         }
     }
 
     override suspend fun unFavorite(item: MenuItem): ApiResponse<Any> {
         return when (Random.nextInt() % 2) {
             0 -> ApiResponse.Success(Any())
-            else -> ApiResponse.Error(Exception("Something went wrong!!"))
+            else -> ApiResponse.Error(ApiException("Something went wrong!!"))
         }
     }
 }

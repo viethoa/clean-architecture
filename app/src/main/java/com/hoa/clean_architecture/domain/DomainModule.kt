@@ -1,6 +1,8 @@
 package com.hoa.clean_architecture.domain
 
-import com.hoa.clean_architecture.data.MenuRepository
+import com.hoa.clean_architecture.data.repository.MenuItemRepository
+import com.hoa.clean_architecture.domain.usecase.MenuItemFavoriteUseCase
+import com.hoa.clean_architecture.domain.usecase.MenuItemFavoriteUseCaseImpl
 import dagger.Module
 import dagger.Provides
 
@@ -8,7 +10,7 @@ import dagger.Provides
 object DomainModule {
 
     @Provides
-    fun provideMenuItemFavoriteUseCase(repository: MenuRepository): MenuItemFavoriteUseCase {
+    fun provideMenuItemFavoriteUseCase(repository: MenuItemRepository): MenuItemFavoriteUseCase {
         return MenuItemFavoriteUseCaseImpl(repository)
     }
 }

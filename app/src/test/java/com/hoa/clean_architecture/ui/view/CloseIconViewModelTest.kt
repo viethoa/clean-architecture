@@ -9,7 +9,7 @@ import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.component.Navigator
 import com.hoa.clean_architecture.component.ResourcesProvider
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIconViewModel
-import com.hoa.clean_architecture.ui.view.fake.FakeHandler
+import com.hoa.clean_architecture.ui.fake.FakeHandler
 import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
 import io.mockk.every

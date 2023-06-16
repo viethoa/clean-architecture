@@ -5,7 +5,7 @@ import android.widget.ImageView
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.data.entity.MenuItem
+import com.hoa.clean_architecture.data.model.MenuItem
 
 class FavoriteIconViewModel constructor(
     private val rootView: View,

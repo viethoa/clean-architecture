@@ -1,15 +1,15 @@
 package com.hoa.clean_architecture.ui.screen
 
-import com.hoa.clean_architecture.data.entity.MenuItem
+import com.hoa.clean_architecture.data.model.MenuItem
 
-sealed interface MainUiState {
+sealed class MainUiState {
     /**
      * Exception when try to get detail of the [MenuItem]
      */
-    object GetMenuItemException : MainUiState
+    object GetMenuItemError : MainUiState()
 
     /**
-     * Exception when Add item into favorite list or UnFavorite
+     * Exception when Add item into user favorite list or Remove item from user favorite list
      */
-    object FavoriteException : MainUiState
+    data class FavoriteError(val error: String) : MainUiState()
 }
