@@ -8,21 +8,22 @@ class TestMenuItem {
 
     @Test
     fun `switch favorite state`() {
-        val item = MenuItem(
+        val menuItem = MenuItem(
             id = 101,
             name = "name",
             description = "description",
             image = 102,
             isFavorite = false
         )
-        val expectedData = MenuItem(
+        val favoriteItem = MenuItem(
             id = 101,
             name = "name",
             description = "description",
             image = 102,
             isFavorite = true
         )
-        assertEquals(item.switchFavoriteState(), expectedData)
+        assertEquals(menuItem.switchFavoriteState(), favoriteItem)
+        assertEquals(favoriteItem.switchFavoriteState(), menuItem)
     }
 
     @Test
