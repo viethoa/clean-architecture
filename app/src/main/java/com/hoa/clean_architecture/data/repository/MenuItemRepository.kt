@@ -9,7 +9,7 @@ interface MenuItemRepository {
      * Get [MenuItem] data
      * 1. Get data from local DB first, do not returns anything if no data
      * 2. Get data from remote
-     *  - If Success, store remote data into local DB and return that data
+     *  - If Success, store remote data into local DB and return [ApiResponse.Success]
      *  - If error, return [ApiResponse.Error]
      */
     suspend fun getMenuItem(itemId: Int): Flow<ApiResponse<MenuItem>>
