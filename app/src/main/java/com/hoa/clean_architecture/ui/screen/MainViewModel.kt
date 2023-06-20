@@ -32,7 +32,7 @@ class MainViewModel constructor(
     private val _loading = MutableLiveData(false)
     override val loadingVisibility: LiveData<Boolean> = _loading
 
-    // Back Button
+    // Close Button
     override val data: LiveData<CloseIcon> = MutableLiveData(
         CloseIcon(CloseIconType.CIRCLE_CLOSE, R.color.white)
     )
