@@ -33,14 +33,13 @@ class MainViewModel constructor(
     override val loadingVisibility: LiveData<Boolean> = _loading
 
     // Close Button
-    override val data: LiveData<CloseIcon> = MutableLiveData(
+    override val closeIcon: LiveData<CloseIcon> = MutableLiveData(
         CloseIcon(CloseIconType.CIRCLE_CLOSE, R.color.white)
     )
 
     // Header & Body
     private val _menuItem = MutableLiveData<MenuItem>()
-    override val menuItem: LiveData<MenuItem> = _menuItem
-    override val bodyContent: LiveData<MenuItem> = _menuItem
+    override val data: LiveData<MenuItem> = _menuItem
 
     fun getMenuItem() {
         _loading.value = true

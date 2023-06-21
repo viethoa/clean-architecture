@@ -19,7 +19,7 @@ class HeaderViewModel constructor(
     fun initializeUI(handler: IHeaderView) {
         closeButton.setHandler(handler)
         favoriteButton.setHandler(handler)
-        handler.menuItem.observe(lifecycleOwner) { item ->
+        handler.data.observe(lifecycleOwner) { item ->
             item.getItemImage()?.let { image.setImageResource(it) }
         }
     }

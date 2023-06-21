@@ -22,7 +22,7 @@ class FavoriteIconViewModel constructor(
     fun initialUI(handler: IFavoriteIcon) {
         this.handler = handler
         // Icon resource
-        handler.menuItem.observe(lifecycleOwner) { item ->
+        handler.data.observe(lifecycleOwner) { item ->
             menuItem = item
             favIcon.setImageResource(
                 when (item.isFavorite) {

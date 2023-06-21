@@ -18,7 +18,7 @@ class CloseIconViewModel constructor(
 
     fun initializeUI(handler: ICloseIcon) {
         with(handler) {
-            data.observe(lifecycleOwner) { data ->
+            closeIcon.observe(lifecycleOwner) { data ->
                 // Icon resource
                 closeButton.setImageResource(
                     when (data.type) {

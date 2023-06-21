@@ -24,5 +24,5 @@ interface ICloseIcon {
     /**
      * To config how does icon looks like
      */
-    val data: LiveData<CloseIcon>
+    val closeIcon: LiveData<CloseIcon>
 }

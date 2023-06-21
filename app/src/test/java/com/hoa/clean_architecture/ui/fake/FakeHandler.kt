@@ -16,11 +16,11 @@ class FakeHandler : ILoadingView, ICloseIcon, IFavoriteIcon {
     override val loadingVisibility: LiveData<Boolean> = _visibility
 
     private val _closeIconData = MutableLiveData<CloseIcon>()
-    override val data: LiveData<CloseIcon> = _closeIconData
+    override val closeIcon: LiveData<CloseIcon> = _closeIconData
 
     private var favoriteClick = 0
     private val _menuItem = MutableLiveData<MenuItem>()
-    override val menuItem: LiveData<MenuItem> = _menuItem
+    override val data: LiveData<MenuItem> = _menuItem
 
     override fun onFavoriteClicked(item: MenuItem) {
         favoriteClick += 1

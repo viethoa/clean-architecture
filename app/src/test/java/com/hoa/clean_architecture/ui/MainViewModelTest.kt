@@ -66,7 +66,7 @@ class MainViewModelTest {
         viewModel = MainViewModel(fakeRepository, favoriteUseCase)
         viewModel.getMenuItem()
         assertEquals(viewModel.loadingVisibility.value, false)
-        assertEquals(viewModel.menuItem.value, menuItem)
+        assertEquals(viewModel.data.value, menuItem)
         assertEquals(viewModel.uiState.value, null)
     }
 
@@ -78,7 +78,7 @@ class MainViewModelTest {
         viewModel.getMenuItem()
         assertEquals(viewModel.loadingVisibility.value, false)
         assertEquals(viewModel.uiState.value, MainUiState.GetMenuItemError)
-        assertEquals(viewModel.menuItem.value, null)
+        assertEquals(viewModel.data.value, null)
     }
 
     @Test
@@ -94,7 +94,7 @@ class MainViewModelTest {
         viewModel.onFavoriteClicked(item)
         assertEquals(viewModel.uiState.value, null)
         assertEquals(viewModel.loadingVisibility.value, false)
-        assertEquals(viewModel.menuItem.value, item.switchFavoriteState())
+        assertEquals(viewModel.data.value, item.switchFavoriteState())
         coVerify(exactly = 1) { favoriteUseCase.switchFavorite(item) }
         confirmVerified(favoriteUseCase)
         confirmVerified(repository)
@@ -112,7 +112,7 @@ class MainViewModelTest {
         val exception = FavoriteException("Something went wrong")
         coEvery { favoriteUseCase.switchFavorite(item) } returns ApiResponse.Error(exception)
         viewModel.onFavoriteClicked(item)
-        assertEquals(viewModel.menuItem.value, item)
+        assertEquals(viewModel.data.value, item)
         assertEquals(viewModel.loadingVisibility.value, false)
         assertEquals(viewModel.uiState.value, MainUiState.FavoriteError("Something went wrong"))
         coVerify(exactly = 1) { favoriteUseCase.switchFavorite(item) }
@@ -133,7 +133,7 @@ class MainViewModelTest {
         viewModel.onFavoriteClicked(item)
         assertEquals(viewModel.uiState.value, null)
         assertEquals(viewModel.loadingVisibility.value, false)
-        assertEquals(viewModel.menuItem.value, item.switchFavoriteState())
+        assertEquals(viewModel.data.value, item.switchFavoriteState())
         coVerify(exactly = 1) { favoriteUseCase.switchFavorite(item) }
         confirmVerified(favoriteUseCase)
         confirmVerified(repository)
@@ -151,7 +151,7 @@ class MainViewModelTest {
         val exception = FavoriteException("Something went wrong")
         coEvery { favoriteUseCase.switchFavorite(item) } returns ApiResponse.Error(exception)
         viewModel.onFavoriteClicked(item)
-        assertEquals(viewModel.menuItem.value, item)
+        assertEquals(viewModel.data.value, item)
         assertEquals(viewModel.loadingVisibility.value, false)
         assertEquals(viewModel.uiState.value, MainUiState.FavoriteError("Something went wrong"))
         coVerify(exactly = 1) { favoriteUseCase.switchFavorite(item) }

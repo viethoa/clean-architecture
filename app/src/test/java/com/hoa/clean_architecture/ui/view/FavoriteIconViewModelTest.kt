@@ -44,7 +44,7 @@ class FavoriteIconViewModelTest {
     fun `should show as favorite item`() {
         viewModel.initialUI(handler)
         handler.setFavoriteItem()
-        assertEquals(viewModel.menuItem, handler.menuItem.value)
+        assertEquals(viewModel.menuItem, handler.data.value)
         verify(exactly = 1) { favIcon.setImageResource(R.drawable.ic_favorite_filled_red) }
         verify(exactly = 1) { favIcon.setOnClickListener(viewModel) }
         confirmVerified(favIcon)
@@ -54,7 +54,7 @@ class FavoriteIconViewModelTest {
     fun `should show as un-favorite item`() {
         viewModel.initialUI(handler)
         handler.setUnFavoriteItem()
-        assertEquals(viewModel.menuItem, handler.menuItem.value)
+        assertEquals(viewModel.menuItem, handler.data.value)
         verify(exactly = 1) { favIcon.setImageResource(R.drawable.ic_favorite_white) }
         verify(exactly = 1) { favIcon.setOnClickListener(viewModel) }
         confirmVerified(favIcon)

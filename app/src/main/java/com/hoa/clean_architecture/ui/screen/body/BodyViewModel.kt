@@ -14,7 +14,7 @@ class BodyViewModel constructor(
     private val description: TextView by lazy { rootView.findViewById(R.id.body_description) }
 
     fun initializeUI(handler: IBodyView) {
-        handler.bodyContent.observe(lifecycleOwner) {
+        handler.data.observe(lifecycleOwner) {
             name.text = it.name.orEmpty()
             description.text = it.description.orEmpty()
         }
