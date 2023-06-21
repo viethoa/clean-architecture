@@ -33,31 +33,6 @@ class MenuItemRepositoryTest {
     }
 
     @Test
-    fun `get menu item with only remote data and no local data`() = runTest {
-        val menuItemId = 101
-        val menuItem = MenuItem(
-            id = menuItemId,
-            name = "name",
-            description = "description",
-            image = 102,
-            isFavorite = false
-        )
-        val remoteMenuItem = ApiResponse.Success(menuItem)
-        coEvery { menuItemDao.getMenuItem(menuItemId) } returns null
-        coEvery { menuItemApiService.getMenuItem(menuItemId) } returns remoteMenuItem
-        val response = repository
-            .getMenuItem(menuItemId)
-            .toList()
-
-        assertEquals(response, listOf(remoteMenuItem))
-        coVerify (exactly = 1) { menuItemDao.getMenuItem(menuItemId) }
-        coVerify (exactly = 1) { menuItemApiService.getMenuItem(menuItemId) }
-        coVerify (exactly = 1) { menuItemDao.addMenuItem(menuItem.toEntity()) }
-        confirmVerified(menuItemApiService)
-        confirmVerified(menuItemDao)
-    }
-
-    @Test
     fun `get menu item with local and remote data`() = runTest {
         val menuItemId = 101
         val menuItem = MenuItem(
@@ -83,6 +58,31 @@ class MenuItemRepositoryTest {
             .toList()
 
         assertEquals(response, listOf(localMenuItem, remoteMenuItem))
+        coVerify (exactly = 1) { menuItemDao.getMenuItem(menuItemId) }
+        coVerify (exactly = 1) { menuItemApiService.getMenuItem(menuItemId) }
+        coVerify (exactly = 1) { menuItemDao.addMenuItem(menuItem.toEntity()) }
+        confirmVerified(menuItemApiService)
+        confirmVerified(menuItemDao)
+    }
+
+    @Test
+    fun `get menu item with only remote data and no local data`() = runTest {
+        val menuItemId = 101
+        val menuItem = MenuItem(
+            id = menuItemId,
+            name = "name",
+            description = "description",
+            image = 102,
+            isFavorite = false
+        )
+        val remoteMenuItem = ApiResponse.Success(menuItem)
+        coEvery { menuItemDao.getMenuItem(menuItemId) } returns null
+        coEvery { menuItemApiService.getMenuItem(menuItemId) } returns remoteMenuItem
+        val response = repository
+            .getMenuItem(menuItemId)
+            .toList()
+
+        assertEquals(listOf(remoteMenuItem), response)
         coVerify (exactly = 1) { menuItemDao.getMenuItem(menuItemId) }
         coVerify (exactly = 1) { menuItemApiService.getMenuItem(menuItemId) }
         coVerify (exactly = 1) { menuItemDao.addMenuItem(menuItem.toEntity()) }
