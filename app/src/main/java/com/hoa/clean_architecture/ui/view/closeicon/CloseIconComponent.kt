@@ -22,10 +22,7 @@ interface CloseIconDependency {
 }
 
 @Module
-class CloseIconModule(
-    private val rootView: View,
-    private val lifecycleOwner: LifecycleOwner
-) {
+class CloseIconModule(private val rootView: View) {
 
     @Provides
     fun provideResourceProvider(): ResourcesProvider {
@@ -40,7 +37,6 @@ class CloseIconModule(
         return CloseIconViewModel(
             rootView,
             navigator,
-            lifecycleOwner,
             resourcesProvider
         )
     }

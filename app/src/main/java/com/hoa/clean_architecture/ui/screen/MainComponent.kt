@@ -1,6 +1,7 @@
 package com.hoa.clean_architecture.ui.screen
 
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.component.Navigator
 import com.hoa.clean_architecture.component.NavigatorImpl
 import com.hoa.clean_architecture.data.DataModule
@@ -24,7 +25,10 @@ interface MainComponent : CloseIconDependency {
 }
 
 @Module
-class MainModule(private val screen: MainActivity) {
+class MainModule(
+    private val screen: MainActivity,
+    private val lifecycleOwner: LifecycleOwner
+) {
 
     @Provides
     fun provideContext(): Context = screen.applicationContext
@@ -39,6 +43,6 @@ class MainModule(private val screen: MainActivity) {
         repository: MenuItemRepository,
         useCase: MenuItemFavoriteUseCase
     ): MainViewModel {
-        return MainViewModel(repository, useCase)
+        return MainViewModel(lifecycleOwner, repository, useCase)
     }
 }

@@ -2,14 +2,12 @@ package com.hoa.clean_architecture.ui.screen.header
 
 import android.view.View
 import android.widget.ImageView
-import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.ui.view.closeicon.CloseIconView
 import com.hoa.clean_architecture.ui.view.favorite.FavoriteIconView
 
 class HeaderViewModel constructor(
-    private val rootView: View,
-    private val lifecycleOwner: LifecycleOwner
+    private val rootView: View
 ) {
 
     private val image: ImageView by lazy { rootView.findViewById(R.id.header_item_image) }
@@ -17,9 +15,9 @@ class HeaderViewModel constructor(
     private val favoriteButton: FavoriteIconView by lazy { rootView.findViewById(R.id.header_favorite_button) }
 
     fun initializeUI(handler: IHeaderView) {
-        closeButton.setHandler(handler)
+        closeButton.setHandler(handler, handler.lifecycleOwner)
         favoriteButton.setHandler(handler)
-        handler.data.observe(lifecycleOwner) { item ->
+        handler.observeData { item ->
             item.getItemImage()?.let { image.setImageResource(it) }
         }
     }

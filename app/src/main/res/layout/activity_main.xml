@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.hoa.clean_architecture.ui.screen.MainViewModel" />
+
+        <variable
+            name="lifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +36,7 @@
             android:id="@+id/item_detail_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:setViewHandler="@{viewModel}" />
+            app:bindScreenLifecycle="@{lifecycleOwner}"
+            app:bindViewHandler="@{viewModel}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

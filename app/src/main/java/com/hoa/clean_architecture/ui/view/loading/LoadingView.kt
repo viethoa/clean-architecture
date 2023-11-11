@@ -4,23 +4,26 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.ui.extension.customViewLifeCycleOwner
+import com.hoa.clean_architecture.ui.base.BaseSharedView
+import com.hoa.clean_architecture.ui.base.BaseViewHandler
+import java.lang.IllegalArgumentException
 
 class LoadingView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr),
+    BaseSharedView {
 
-    private val lifecycleOwner by customViewLifeCycleOwner()
-    private val viewModel by lazy { LoadingViewModel(rootView, lifecycleOwner) }
+    private val viewModel by lazy { LoadingViewModel(rootView) }
 
     init {
         View.inflate(context, R.layout.view_loading, this)
     }
 
-    fun setViewHandler(handler: ILoadingView) {
-        viewModel.initializeUI(handler)
+    override fun bindViewHandler(handler: BaseViewHandler, lifecycleOwner: LifecycleOwner) {
+        viewModel.initializeUI(handler as ILoadingView, lifecycleOwner)
     }
 }

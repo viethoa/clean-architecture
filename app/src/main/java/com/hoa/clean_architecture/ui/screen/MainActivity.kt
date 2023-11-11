@@ -17,7 +17,7 @@ class MainActivity : BaseActivity() {
 
     private val component by lazy {
         DaggerMainComponent.builder()
-            .mainModule(MainModule(this))
+            .mainModule(MainModule(this, this))
             .build()
     }
 
@@ -31,6 +31,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         viewModel.uiState.observe(this) { state ->
             when (state) {

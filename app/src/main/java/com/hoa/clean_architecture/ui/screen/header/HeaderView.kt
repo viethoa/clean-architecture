@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.ui.extension.customViewLifeCycleOwner
 
 class HeaderView @JvmOverloads constructor(
     context: Context,
@@ -13,8 +12,7 @@ class HeaderView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private val lifecycleOwner by customViewLifeCycleOwner()
-    private val viewModel by lazy { HeaderViewModel(this, lifecycleOwner) }
+    private val viewModel by lazy { HeaderViewModel(this) }
 
     init {
         View.inflate(context, R.layout.view_main_header, this)

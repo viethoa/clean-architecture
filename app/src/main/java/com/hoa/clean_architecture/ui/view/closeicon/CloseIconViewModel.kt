@@ -10,13 +10,12 @@ import com.hoa.clean_architecture.component.ResourcesProvider
 class CloseIconViewModel constructor(
     private val rootView: View,
     private val navigator: Navigator,
-    private val lifecycleOwner: LifecycleOwner,
     private val resourcesProvider: ResourcesProvider
 ) : View.OnClickListener {
 
     private val closeButton by lazy { rootView.findViewById<ImageView>(R.id.view_close_button) }
 
-    fun initializeUI(handler: ICloseIcon) {
+    fun initializeUI(handler: ICloseIcon, lifecycleOwner: LifecycleOwner) {
         with(handler) {
             closeIcon.observe(lifecycleOwner) { data ->
                 // Icon resource

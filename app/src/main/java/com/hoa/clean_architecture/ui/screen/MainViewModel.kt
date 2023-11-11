@@ -1,5 +1,6 @@
 package com.hoa.clean_architecture.ui.screen
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,7 @@ import com.hoa.clean_architecture.ui.screen.header.IHeaderView
 import kotlinx.coroutines.launch
 
 class MainViewModel constructor(
+    private val screenLifecycleOwner: LifecycleOwner,
     private val repository: MenuItemRepository,
     private val favoriteUseCase: MenuItemFavoriteUseCase
 ) : ViewModel(),
@@ -40,6 +42,9 @@ class MainViewModel constructor(
     // Header & Body
     private val _menuItem = MutableLiveData<MenuItem>()
     override val data: LiveData<MenuItem> = _menuItem
+
+    override val lifecycleOwner: LifecycleOwner
+        get() = screenLifecycleOwner
 
     fun getMenuItem() {
         _loading.value = true

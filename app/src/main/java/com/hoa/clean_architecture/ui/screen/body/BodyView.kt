@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.ui.extension.customViewLifeCycleOwner
 
 class BodyView @JvmOverloads constructor(
     context: Context,
@@ -13,8 +13,7 @@ class BodyView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private val lifecycleOwner by customViewLifeCycleOwner()
-    private val viewModel by lazy { BodyViewModel(this, lifecycleOwner) }
+    private val viewModel by lazy { BodyViewModel(this) }
 
     init {
         View.inflate(context, R.layout.view_main_body, this)

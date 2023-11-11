@@ -4,9 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.ui.extension.asDIParent
-import com.hoa.clean_architecture.ui.extension.customViewLifeCycleOwner
 import javax.inject.Inject
 
 class CloseIconView @JvmOverloads constructor(
@@ -18,18 +18,16 @@ class CloseIconView @JvmOverloads constructor(
     @Inject
     lateinit var viewModel: CloseIconViewModel
 
-    private val lifecycleOwner by customViewLifeCycleOwner()
-
     init {
         View.inflate(context, R.layout.view_close_button, this)
         DaggerCloseIconComponent.builder()
-            .closeIconModule(CloseIconModule(rootView, lifecycleOwner))
+            .closeIconModule(CloseIconModule(rootView))
             .closeIconDependency(asDIParent?.getDependency(CloseIconDependency::class))
             .build()
             .inject(this)
     }
 
-    fun setHandler(handler: ICloseIcon) {
-        viewModel.initializeUI(handler)
+    fun setHandler(handler: ICloseIcon, lifecycleOwner: LifecycleOwner) {
+        viewModel.initializeUI(handler, lifecycleOwner)
     }
 }

@@ -3,13 +3,11 @@ package com.hoa.clean_architecture.ui.view.favorite
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LifecycleOwner
 import com.hoa.clean_architecture.R
 import com.hoa.clean_architecture.data.model.MenuItem
 
 class FavoriteIconViewModel constructor(
-    private val rootView: View,
-    private val lifecycleOwner: LifecycleOwner
+    private val rootView: View
 ) : View.OnClickListener {
 
     private val favIcon by lazy { rootView.findViewById<ImageView>(R.id.view_favorite_icon) }
@@ -22,7 +20,7 @@ class FavoriteIconViewModel constructor(
     fun initialUI(handler: IFavoriteIcon) {
         this.handler = handler
         // Icon resource
-        handler.data.observe(lifecycleOwner) { item ->
+        handler.observeData { item ->
             menuItem = item
             favIcon.setImageResource(
                 when (item.isFavorite) {

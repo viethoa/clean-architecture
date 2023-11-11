@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.hoa.clean_architecture.R
-import com.hoa.clean_architecture.ui.extension.customViewLifeCycleOwner
 
 class FavoriteIconView @JvmOverloads constructor(
     context: Context,
@@ -13,8 +12,7 @@ class FavoriteIconView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private val lifecycleOwner by customViewLifeCycleOwner()
-    private val viewModel by lazy { FavoriteIconViewModel(rootView, lifecycleOwner) }
+    private val viewModel by lazy { FavoriteIconViewModel(rootView) }
 
     init {
         View.inflate(context, R.layout.view_favorite, this)
